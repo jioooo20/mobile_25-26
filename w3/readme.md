@@ -2,7 +2,7 @@
 
 | Nama      | NIM      | Kelas      | Mata Kuliah | Semester |
 |-----------|----------|------------|-------------|----------|
-| Giovano Alkandri | 2341720096| TI-2C| PEMROGRAMAN MOBILE    | 5        |
+| Giovano Alkandri | 2341720096| TI-3H| PEMROGRAMAN MOBILE    | 5        |
 
 ## 2. Praktikum 1: Menerapkan Control Flows ("if/else")
 Ketik atau salin kode program berikut ke dalam fungsi main().
