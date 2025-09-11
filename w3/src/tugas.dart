@@ -14,6 +14,8 @@ void main(List<String> args) {
     }
     if (isPrima) {
       print("$angka \nNIM: 2341720096 \nNama: Giovano Alkandri");
+    }else if (!isPrima){
+      print("$angka");
     }
     angka++;
   }
