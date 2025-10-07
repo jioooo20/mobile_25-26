@@ -9,4 +9,4 @@
 
 Hasil Tugas Praktikum 1
 
-![Image](/w6/basic_layout_flutter/images/tugasprak1.gif)
+![Image](/w6/basic_layout_flutter/img/tugasprak1.gif)
