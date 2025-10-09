@@ -8,7 +8,7 @@
 
 >Gambar di bawah ini menunjukkan perbandingan antara penggunaan plugin AutoSizeText dan widget Text biasa di Flutter. Pada kotak kuning, teks menggunakan AutoSizeText yang otomatis menyesuaikan ukuran huruf agar muat di dalam container berukuran sempit, meskipun sebagian teks masih tampak terpotong karena ruangnya sangat terbatas. Sementara itu, pada kotak hijau, teks menggunakan widget Text biasa yang tidak menyesuaikan ukuran font, melainkan membungkus teks ke beberapa baris agar seluruh kalimat tetap terlihat. Perbandingan ini menunjukkan bahwa AutoSizeText berguna untuk mengontrol ukuran font secara adaptif, sedangkan Text biasa hanya menampilkan teks sesuai batas lebar container tanpa mengubah ukuran huruf.
 
-![Image](/w7/layout_flutter/img/image.png)
+![Image](/w7/flutter_plugin_pubdev/img/image.png)
 
 ## Langkah 2 pada Praktikum
 
