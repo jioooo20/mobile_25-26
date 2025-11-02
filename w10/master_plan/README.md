@@ -6,7 +6,7 @@
 
 
 ## Praktikum 1
-![GIF](/w10/img/p1.gif)
+![GIF](/w10/master_plan/img/p1.gif)
 2. Jelaskan maksud dari langkah 4 pada praktikum tersebut! Mengapa dilakukan demikian?
     > file tersebut digunakan sebagai penampung export, file ini mengumpulkan semua export dari model" data dalam satu tempat. alasannya untuk menyederhanakan import dan clean code.
 3. Mengapa perlu variabel plan di langkah 6 pada praktikum tersebut? Mengapa dibuat konstanta ?
@@ -18,7 +18,7 @@
 
 
 ## Praktikum 2
-![GIF](/w10/img/p2.gif)
+![GIF](/w10/master_plan/img/p2.gif)
 2. Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
     >class PlanProvider extends InheritedNotifier<ValueNotifier<Plan>> 
 
@@ -34,9 +34,9 @@
 
 
 ## Praktikum 3
-![GIF](/w10/img/p3.gif)
+![GIF](/w10/master_plan/img/p3.gif)
 2. Berdasarkan Praktikum 3 yang telah Anda lakukan, jelaskan maksud dari gambar diagram berikut ini!
-![Image](/w10/img/tp3num2.png)
+![Image](/w10/master_plan/img/tp3num2.png)
 
 > Diagram ini menunjukkan transformasi struktur widget hierarchy setelah melakukan navigasi (Navigator.push) dalam aplikasi Flutter.
 > Sisi Kiri (Before): Menampilkan struktur awal dengan MaterialApp - PlanProvider - PlanCreatorScreen yang berisi Column dengan child TextField dan Expanded (yang memuat ListView).
