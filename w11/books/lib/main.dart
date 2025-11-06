@@ -43,8 +43,17 @@ class _FuturePageState extends State<FuturePage> {
             ElevatedButton(
               child: const Text("GO!"),
               onPressed: () {
-                count();
-                setState(() {});
+                getNumber()
+                    .then((value) {
+                      setState(() {
+                        result = value.toString();
+                      });
+                    })
+                    .catchError((e) {
+                      result = 'An error occurred';
+                    });
+                // count();
+                // setState(() {});
                 getData()
                     .then((value) {
                       result = value.body.toString().substring(0, 450);
@@ -97,5 +106,22 @@ class _FuturePageState extends State<FuturePage> {
     setState(() {
       result = total.toString();
     });
+  }
+
+  late Completer completer;
+
+  Future getNumber() {
+    completer = Completer<int>();
+    calculate();
+    return completer.future;
+  }
+
+  Future calculate() async {
+    try {
+      await Future.delayed(const Duration(seconds: 5));
+      completer.complete(42);
+    } catch (_) {
+      completer.completeError({});
+    }
   }
 }

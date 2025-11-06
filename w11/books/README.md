@@ -14,5 +14,13 @@
 - CatchError() = blok untuk menangani error/exception yang terjadi dalam operasi asynchronous (seperti Future)
 
 
-## Praktikum 1 W11 Soal 4
+## Praktikum 2 W11 Soal 4
 ![GIF](/w11/books/img/gif2.gif)
+
+
+## Praktikum 3 W11 Soal 5
+![GIF](/w11/books/img/gif2.gif)
+
+
+## Praktikum 3 W11 Soal 6
+>Perbedaan kode tersebut ialah adanya error handling dalam calculate() dan error handling pada di pemanggilan getnumber(). error handling berfungsi untuk menampilkan error tanpa membuat aplikasi tersebut crash
