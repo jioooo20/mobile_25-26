@@ -39,3 +39,10 @@ Jelaskan maksud perbedaan kode langkah 1 dan 4!
 
 ## Praktikum 5 W11 Soal 10
 >Perbedaan utama terletak pada pendekatan penanganan error: kode pertama menggunakan method chaining dengan .then().catchError().whenComplete() yang khas untuk pattern Future-based, dimana error ditangani secara terpisah melalui catchError dan completion handling via whenComplete. Sedangkan kode kedua menggunakan async/await dengan try-catch-finally yang lebih synchronous-like dan readable, dimana semua flow (success, error, completion) ditangani dalam satu blok terstruktur dengan catch untuk error dan finally untuk cleanup, membuat kode lebih terorganisir dan mudah dibaca terutama untuk logika yang kompleks.
+
+
+## Praktikum 6 W11 Soal 12
+![GIF](/w11/books/img/gif6.gif)
+
+- Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
+    >Ya, karena browser yang saya gunakan mendeteksi adanya gps yang ada di device sehingga itu membuat browser dapat menampilkan posisi.
