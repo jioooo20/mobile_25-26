@@ -15,4 +15,4 @@
 
 
 ## Praktikum 1 W11 Soal 4
-![GIF](/w11/books/img/gif2.png)
+![GIF](/w11/books/img/gif2.gif)
