@@ -28,3 +28,7 @@
 
 ## Praktikum 4 W11 Soal 7
 ![GIF](/w11/books/img/gif4.gif)
+
+## Praktikum 4 W11 Soal 8
+Jelaskan maksud perbedaan kode langkah 1 dan 4!
+>Future.wait menerima list Future yang sudah ditentukan dari awal dan langsung mengeksekusi semuanya sekaligus, sehingga lebih ringkas dan cocok untuk kasus dimana semua Future sudah diketahui sejak awal. Sementara FutureGroup memungkinkan penambahan Future secara dinamis menggunakan method add() dan harus explicitly ditutup dengan close(), membuatnya lebih fleksibel untuk skenario dimana Future perlu ditambahkan secara bertahap atau conditional selama runtime. 
