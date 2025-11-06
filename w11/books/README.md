@@ -61,3 +61,10 @@ Jelaskan maksud perbedaan kode langkah 1 dan 4!
 
 - Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
     >tidak ada, hanya ditambahkan penanganan untuk menampilkan error handling
+
+    
+## Praktikum 6 W11 Soal 16
+![GIF](/w11/books/img/gif8.gif)
+
+- Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+    >setiap klik change color akan pindah ke second screen untuk memilih warna lain
