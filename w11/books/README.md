@@ -19,8 +19,12 @@
 
 
 ## Praktikum 3 W11 Soal 5
-![GIF](/w11/books/img/gif2.gif)
+![GIF](/w11/books/img/gif3.gif)
 
 
 ## Praktikum 3 W11 Soal 6
 >Perbedaan kode tersebut ialah adanya error handling dalam calculate() dan error handling pada di pemanggilan getnumber(). error handling berfungsi untuk menampilkan error tanpa membuat aplikasi tersebut crash
+
+
+## Praktikum 4 W11 Soal 7
+![GIF](/w11/books/img/gif4.gif)
