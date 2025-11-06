@@ -6,7 +6,7 @@
 
 
 ## Praktikum 1 W11 Soal 2
-![Image](/w11/img/img1.png)
+![Image](/w11/books/img/img1.png)
 
 
 ## Praktikum 1 W11 Soal 3
@@ -15,4 +15,4 @@
 
 
 ## Praktikum 1 W11 Soal 4
-![GIF](/w11/img/gif2.png)
+![GIF](/w11/books/img/gif2.png)
