@@ -46,3 +46,18 @@ Jelaskan maksud perbedaan kode langkah 1 dan 4!
 
 - Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
     >Ya, karena browser yang saya gunakan mendeteksi adanya gps yang ada di device sehingga itu membuat browser dapat menampilkan posisi.
+
+
+
+## Praktikum 6 W11 Soal 13
+![GIF](/w11/books/img/gif7.gif)
+
+- Apakah ada perbedaan UI dengan praktikum sebelumnya? Mengapa demikian?
+    > Ya, perbedaan nya ada pada cara menampilkan latitude dan longitude nya, pada kode yang baru langsung ditampilkan format dari plugin
+
+    
+## Praktikum 6 W11 Soal 14
+![GIF](/w11/books/img/gif7.gif)
+
+- Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
+    >tidak ada, hanya ditambahkan penanganan untuk menampilkan error handling

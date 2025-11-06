@@ -10,33 +10,61 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   String myPosition = '';
+  Future<Position>? positionFuture;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getPosition().then((Position myPos) {
+  //     myPosition =
+  //         'Lat: ${myPos.latitude.toString()} - Long: ${myPos.longitude.toString()}';
+  //     setState(() {
+  //       myPosition = myPosition;
+  //     });
+  //   });
+  // }
+
   @override
   void initState() {
     super.initState();
-    getPosition().then((Position myPos) {
-      myPosition =
-          'Lat: ${myPos.latitude.toString()} - Long: ${myPos.longitude.toString()}';
-      setState(() {
-        myPosition = myPosition;
-      });
-    });
+    positionFuture = getPosition();
   }
+
   @override
   Widget build(BuildContext context) {
-    final myWidget = myPosition == ''
-        ? const CircularProgressIndicator()
-        : Text(myPosition);
     return Scaffold(
       appBar: AppBar(title: const Text("Current Location GEOOOOO")),
       body: Center(
-        child: myWidget,
+        child: FutureBuilder(
+          future: positionFuture,
+          builder: (BuildContext context, AsyncSnapshot<Position> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong: ${snapshot.error}');
+              }
+              return Text(snapshot.data.toString());
+            } else {
+              return const Text('No data available');
+            }
+          },
+        ),
       ),
     );
+    // final myWidget = myPosition == ''
+    //     ? const CircularProgressIndicator()
+    //     : Text(myPosition);
+    // return Scaffold(
+    //   appBar: AppBar(title: const Text("Current Location GEOOOOO")),
+    //   body: Center(child: myWidget),
+    // );
   }
+
   Future<Position> getPosition() async {
-    await Future.delayed(const Duration(seconds: 3));
-    await Geolocator.requestPermission();
     await Geolocator.isLocationServiceEnabled();
+    await Future.delayed(const Duration(seconds: 3));
+    // await Geolocator.requestPermission();
     Position? position = await Geolocator.getCurrentPosition();
     return position;
   }
