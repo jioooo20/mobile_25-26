@@ -68,3 +68,11 @@ Jelaskan maksud perbedaan kode langkah 1 dan 4!
 
 - Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
     >setiap klik change color akan pindah ke second screen untuk memilih warna lain
+
+
+## Praktikum 6 W11 Soal 17
+![GIF](/w11/books/img/gif9.gif)
+
+- Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+    >Setelah menguji kode tersebut, ketika setiap button ditekan, warna latar belakang Scaffold akan berubah sesuai dengan warna yang dipilih (merah, hijau, atau biru). Hal ini terjadi karena pada setiap TextButton, warna color diubah secara langsung sebelum memanggil Navigator.pop(context, color). Nilai color yang baru ini kemudian dikembalikan sebagai hasil dari showDialog dan ditangkap oleh variabel color di luar dialog melalui await. Setelah dialog ditutup, setState(() {}) dipanggil yang memicu rebuild widget dengan warna latar belakang yang telah diperbarui, sehingga perubahan warna dapat langsung terlihat pada UI.
+
