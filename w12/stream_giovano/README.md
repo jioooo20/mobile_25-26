@@ -17,3 +17,33 @@
   **Jawaban:**
   
   Kode tersebut membuat sebuah Stream yang menghasilkan objek `Color` secara periodik setiap 1 detik. `Stream.periodic` membuat Stream yang emit nilai berdasarkan interval waktu tertentu. Parameter `(int t)` adalah counter yang increment setiap interval (dimulai dari 0, 1, 2, dst). Dengan `t % colors.length`, kode menghitung index dalam list colors secara berulang (0-9, kemudian kembali ke 0), sehingga Stream akan terus menghasilkan warna-warna dari list `colors` secara berurutan dan berulang tanpa henti.
+
+## Praktikum 1 W12 Soal 4
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+![GIF]('/img/soal4.gif')
+
+## Praktikum 1 W12 Soal 5
+- Jelaskan perbedaan menggunakan listen dan await for (langkah 9) !
+
+  **Jawaban:**
+  
+  Perbedaan utama antara `listen` dan `await for`:
+
+  **1. listen:**
+  - Bersifat **asynchronous non-blocking**, kode setelah `listen` akan tetap dieksekusi tanpa menunggu Stream selesai
+  - Menggunakan callback function untuk menangani setiap event yang datang
+  - Lebih fleksibel karena bisa mengatur `onError`, `onDone`, dan `cancelOnError`
+  - Cocok untuk Stream yang berjalan di background tanpa memblokir eksekusi kode lain
+  - Contoh: `stream.listen((event) { /* handle event */ });`
+
+  **2. await for:**
+  - Bersifat **synchronous blocking**, kode akan menunggu di loop ini sampai Stream selesai atau di-break
+  - Menggunakan loop untuk iterasi, membuat kode lebih mudah dibaca seperti loop biasa
+  - Harus berada dalam function yang ditandai `async`
+  - Memblokir eksekusi kode berikutnya sampai loop selesai
+  - Cocok untuk memproses Stream secara sequential dan mengontrol flow dengan lebih mudah
+  - Contoh: `await for (var event in stream) { /* handle event */ }`
+
+  **Kesimpulan:** Gunakan `listen` jika ingin Stream berjalan di background tanpa memblokir kode lain, gunakan `await for` jika perlu memproses Stream secara berurutan dan memblokir eksekusi sampai selesai.
+

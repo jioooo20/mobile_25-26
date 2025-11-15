@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'stream.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,38 +28,47 @@ class StreamHomePage extends StatefulWidget {
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
-  int _counter = 0;
+  // int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  Color bgColor = Colors.blueGrey;
+  late ColorStream colorStream;
+
+  // void _incrementCounter() {
+  //   setState(() {
+  //     _counter++;
+  //   });
+  // }
+
+  void changeColor() async {
+    // await for (var eventColor in colorStream.getColorStream()) {
+    colorStream.getColorStream().listen((eventColor) {
+      setState(() {
+        bgColor = eventColor;
+      });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    colorStream = ColorStream();
+    changeColor();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Stream gioo'),
+        title: const Text('Stream gioooo'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: Container(
+        decoration: BoxDecoration(color: bgColor),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
