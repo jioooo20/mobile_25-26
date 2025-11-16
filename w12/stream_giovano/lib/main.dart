@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'stream.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +40,9 @@ class _StreamHomePageState extends State<StreamHomePage> {
   //   });
   // }
 
+  int lastNumber = 0;
+  late NumberStream numberStream;
+
   void changeColor() async {
     // await for (var eventColor in colorStream.getColorStream()) {
     colorStream.getColorStream().listen((eventColor) {
@@ -50,20 +54,49 @@ class _StreamHomePageState extends State<StreamHomePage> {
 
   @override
   void initState() {
+    numberStream = NumberStream();
+    numberStream.stream.listen((eventNumber) {
+      setState(() {
+        lastNumber = eventNumber;
+      });
+    });
     super.initState();
-    colorStream = ColorStream();
-    changeColor();
+    // colorStream = ColorStream();
+    // changeColor();
+  }
+
+  @override
+  void dispose() {
+    numberStream.close();
+    super.dispose();
+  }
+
+  void addRandomNumber() {
+    Random random = Random();
+    int randomNumber = random.nextInt(10);
+    numberStream.addNumberToSink(randomNumber);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stream gioooo'),
+      appBar: AppBar(title: const Text('Stream gioooo')),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(lastNumber.toString()),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: addRandomNumber,
+              child: const Text('Add Random Number'),
+            ),
+          ],
+        ),
       ),
-      body: Container(
-        decoration: BoxDecoration(color: bgColor),
-      ),
+      // body: Container(decoration: BoxDecoration(color: bgColor)),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',

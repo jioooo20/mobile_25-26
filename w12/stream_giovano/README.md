@@ -47,3 +47,51 @@
 
   **Kesimpulan:** Gunakan `listen` jika ingin Stream berjalan di background tanpa memblokir kode lain, gunakan `await for` jika perlu memproses Stream secara berurutan dan memblokir eksekusi sampai selesai.
 
+## Praktikum 1 W12 Soal 6
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+![GIF]('/img/soal6.gif')
+
+- Jelaskan maksud kode langkah 8 dan 10 tersebut!
+
+  **Jawaban:**
+
+  **Langkah 8 - Method `initState()`:**
+  ```dart
+  void initState() {
+    numberStream = NumberStream();
+    numberStream.stream.listen((eventNumber) {
+      setState(() {
+        lastNumber = eventNumber;
+      });
+    });
+    super.initState();
+  }
+  ```
+  
+  Method `initState()` dipanggil sekali saat widget pertama kali dibuat (initialization). Di dalamnya:
+  - `numberStream = NumberStream()` membuat instance baru dari class `NumberStream` yang mengelola StreamController
+  - `numberStream.stream.listen()` men-subscribe ke Stream untuk mendengarkan setiap data yang masuk
+  - Setiap kali ada data baru (`eventNumber`) yang di-emit ke Stream, callback function akan dijalankan
+  - `setState(() { lastNumber = eventNumber; })` mengupdate nilai `lastNumber` dengan nilai terbaru dari Stream dan memicu rebuild UI untuk menampilkan angka terbaru
+  - Dengan kata lain, kode ini **setup listener** yang siap menangkap dan menampilkan angka yang dikirim ke Stream
+
+  **Langkah 10 - Method `addRandomNumber()`:**
+  ```dart
+  void addRandomNumber() {
+    Random random = Random();
+    int randomNumber = random.nextInt(10);
+    numberStream.addNumberToSink(randomNumber);
+  }
+  ```
+  
+  Method ini dipanggil saat tombol "Add Random Number" ditekan. Prosesnya:
+  - `Random()` membuat instance generator angka acak
+  - `random.nextInt(10)` menghasilkan angka acak dari 0-9
+  - `numberStream.addNumberToSink(randomNumber)` mengirim/memasukkan angka acak tersebut ke dalam Stream melalui Sink
+  - Angka ini kemudian akan diterima oleh listener di `initState()` dan ditampilkan di UI
+
+  **Hubungan kedua kode:**
+  - `initState()` = **Listener/Penerima** yang menunggu data dari Stream
+  - `addRandomNumber()` = **Sender/Pengirim** yang mengirim data ke Stream
+  - Mereka bekerja dengan pola **Producer-Consumer** menggunakan Stream sebagai jembatan komunikasi asynchronous
