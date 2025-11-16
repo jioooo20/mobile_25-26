@@ -21,7 +21,7 @@
 ## Praktikum 1 W12 Soal 4
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
 
-![GIF]('/w12/stream_giovano/img/soal4.gif')
+![GIF]('w12/stream_giovano/img/soal4.gif')
 
 ## Praktikum 1 W12 Soal 5
 - Jelaskan perbedaan menggunakan listen dan await for (langkah 9) !
@@ -50,7 +50,7 @@
 ## Praktikum 2 W12 Soal 6
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
 
-![GIF]('/w12/stream_giovano/img/soal6.gif')
+![GIF]('w12/stream_giovano/img/soal6.gif')
 
 - Jelaskan maksud kode langkah 8 dan 10 tersebut!
 
@@ -100,7 +100,7 @@
 
 ## Praktikum 2 W12 Soal 7
 
-![GIF]('/w12/stream_giovano/img/soal7.gif')
+![GIF]('w12/stream_giovano/img/soal7.gif')
 
 - Jelaskan maksud kode langkah 13 sampai 15 tersebut!
 
@@ -154,7 +154,7 @@
 
 ## Praktikum 3 W12 Soal 8
 
-![GIF]('/w12/stream_giovano/img/soal8.gif')
+![GIF]('w12/stream_giovano/img/soal8.gif')
 
 - Jelaskan maksud kode langkah 1 sampai 3 tersebut!
 
@@ -213,9 +213,9 @@
 
 ## Praktikum 4 W12 Soal 9
 
-![GIF]('/w12/stream_giovano/img/soal9.gif')
+![GIF]('w12/stream_giovano/img/soal9.gif')
 
-![GIF]('/w12/stream_giovano/img/soal9img.png')
+![GIF]('w12/stream_giovano/img/soal9img.png')
 
 - Jelaskan maksud kode langkah 2, 6, dan 8 tersebut!
 
@@ -360,7 +360,7 @@
   
 ## Praktikum 5 W12 Soal 11
 
-![GIF]('/w12/stream_giovano/img/soal11.gif')
+![GIF]('w12/stream_giovano/img/soal11.gif')
 
 - Jelaskan mengapa hal itu bisa terjadi ?
 
@@ -409,7 +409,7 @@
 
   ## Praktikum 6 W12 Soal 12
 
-![GIF]('/w12/streambuilder_giovano/img/soal12.gif')
+![GIF]('w12/streambuilder_giovano/img/soal12.gif')
 
 - Jelaskan maksud kode langkah 3 dan 7 tersebut!
 
@@ -472,7 +472,7 @@ body: StreamBuilder(
 
 ## Praktikum 7 W12 Soal 13
 
-![GIF]('/w12/bloc_random_gio/img/soal13.gif')
+![GIF]('w12/bloc_random_gio/img/soal13.gif')
 
 - Jelaskan maksud praktikum ini ! Dimanakah letak konsep pola BLoC-nya ?
 
