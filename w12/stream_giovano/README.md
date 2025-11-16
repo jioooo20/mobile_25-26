@@ -95,3 +95,59 @@
   - `initState()` = **Listener/Penerima** yang menunggu data dari Stream
   - `addRandomNumber()` = **Sender/Pengirim** yang mengirim data ke Stream
   - Mereka bekerja dengan pola **Producer-Consumer** menggunakan Stream sebagai jembatan komunikasi asynchronous
+
+
+
+## Praktikum 1 W12 Soal 7
+
+![GIF]('/img/soal7.gif')
+
+- Jelaskan maksud kode langkah 13 sampai 15 tersebut!
+
+  **Jawaban:**
+
+  **Langkah 13 - Method `addError()` di class `NumberStream`:**
+  ```dart
+  addError(){
+    _controller.sink.addError("error");
+  }
+  ```
+  
+  Method ini digunakan untuk mengirimkan error ke dalam Stream. `_controller.sink.addError("error")` akan memasukkan sebuah error dengan pesan "error" ke dalam Stream melalui Sink. Error ini nantinya akan ditangkap oleh error handler di listener.
+
+  **Langkah 14 - Error Handler `onError()` di `initState()`:**
+  ```dart
+  }).onError((error){
+    setState(() {
+      lastNumber = -1;
+    });
+  });
+  ```
+  
+  Ini adalah error handler yang ditambahkan pada listener Stream. Ketika Stream menerima error (yang dikirim melalui `addError()`):
+  - Callback `onError` akan dijalankan
+  - `setState(() { lastNumber = -1; })` mengubah nilai `lastNumber` menjadi -1 sebagai indikator bahwa terjadi error
+  - UI akan diupdate untuk menampilkan nilai -1 di layar
+
+  **Langkah 15 - Modifikasi method `addRandomNumber()`:**
+  ```dart
+  void addRandomNumber() {
+    Random random = Random();
+    // int randomNumber = random.nextInt(10);
+    // numberStream.addNumberToSink(randomNumber);
+    numberStream.addError();
+  }
+  ```
+  
+  Method ini dimodifikasi untuk mengirim error ke Stream instead of mengirim angka random:
+  - Kode lama (yang di-comment) mengirim angka random ke Stream
+  - Kode baru `numberStream.addError()` mengirim error ke Stream
+  - Ketika tombol "Add Random Number" ditekan, akan memicu error handler dan menampilkan -1 di layar
+
+  **Kesimpulan:**
+  Ketiga kode ini bekerja sama untuk mendemonstrasikan **error handling dalam Stream**:
+  1. `addError()` = mengirim error ke Stream
+  2. `onError()` = menangkap dan menangani error yang terjadi di Stream
+  3. `addRandomNumber()` yang dimodifikasi = trigger untuk mengirim error saat tombol ditekan
+
+  
