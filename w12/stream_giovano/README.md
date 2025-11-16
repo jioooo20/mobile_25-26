@@ -47,7 +47,7 @@
 
   **Kesimpulan:** Gunakan `listen` jika ingin Stream berjalan di background tanpa memblokir kode lain, gunakan `await for` jika perlu memproses Stream secara berurutan dan memblokir eksekusi sampai selesai.
 
-## Praktikum 1 W12 Soal 6
+## Praktikum 2 W12 Soal 6
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
 
 ![GIF]('/img/soal6.gif')
@@ -98,7 +98,7 @@
 
 
 
-## Praktikum 1 W12 Soal 7
+## Praktikum 2 W12 Soal 7
 
 ![GIF]('/img/soal7.gif')
 
@@ -150,4 +150,61 @@
   2. `onError()` = menangkap dan menangani error yang terjadi di Stream
   3. `addRandomNumber()` yang dimodifikasi = trigger untuk mengirim error saat tombol ditekan
 
+
+
+## Praktikum 3 W12 Soal 8
+
+![GIF]('/img/soal7.gif')
+
+- Jelaskan maksud kode langkah 1 sampai 3 tersebut!
+
+  **Jawaban:**
+
+  **Langkah 1 - Deklarasi `StreamTransformer`:**
+  ```dart
+  late StreamTransformer<int, int> transformer;
+  ```
   
+  Mendeklarasikan variabel `transformer` dengan tipe `StreamTransformer<int, int>`. StreamTransformer adalah sebuah class yang digunakan untuk **memodifikasi atau mentransformasi data** yang mengalir melalui Stream. Generic `<int, int>` menunjukkan bahwa transformer ini menerima input berupa `int` dan menghasilkan output berupa `int`.
+
+  **Langkah 2 - Inisialisasi `StreamTransformer` dengan handlers:**
+  ```dart
+  transformer = StreamTransformer<int, int>.fromHandlers(
+    handleData: (value, sink) {
+      sink.add(value*10);
+    },
+    handleError: (error, stackTrace, sink) {
+      sink.add(-1);
+    },
+    handleDone: (sink) => sink.close(),
+  );
+  ```
+  
+  Membuat instance `StreamTransformer` dengan mendefinisikan tiga handler:
+  
+  - **`handleData`**: Handler untuk memproses data normal yang masuk
+    - Menerima `value` (data asli) dan `sink` (output channel)
+    - `sink.add(value*10)` mengalikan nilai yang masuk dengan 10 sebelum dikirim ke listener
+    - Contoh: jika nilai asli 5, yang diterima listener adalah 50
+  
+  - **`handleError`**: Handler untuk memproses error yang terjadi di Stream
+    - Menerima `error`, `stackTrace`, dan `sink`
+    - `sink.add(-1)` mengubah error menjadi nilai -1 dan mengirimnya sebagai data normal
+    - Ini mengkonversi error menjadi data, mencegah error merusak aliran Stream
+  
+  - **`handleDone`**: Handler yang dipanggil ketika Stream selesai
+    - `sink.close()` menutup output sink ketika Stream selesai
+
+  **Langkah 3 - Menerapkan transformer ke Stream:**
+  ```dart
+  numberStream.stream.transform(transformer).listen((eventNumber) {
+  ```
+  
+  Menerapkan transformer ke Stream menggunakan method `.transform()`:
+  - `numberStream.stream` adalah Stream asli
+  - `.transform(transformer)` menerapkan transformasi yang sudah didefinisikan
+  - Data yang mengalir melalui Stream akan diproses oleh transformer sebelum sampai ke listener
+  - `.listen()` tetap digunakan untuk mendengarkan hasil transformasi
+
+  **Kesimpulan:**
+  StreamTransformer berfungsi sebagai **middleware** atau **filter** yang berada di antara Stream producer dan consumer. Dalam kasus ini, transformer mengalikan setiap angka dengan 10 dan mengubah error menjadi nilai -1, sehingga listener selalu menerima data yang sudah dimodifikasi.

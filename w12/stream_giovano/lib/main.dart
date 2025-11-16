@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'stream.dart';
 import 'dart:math';
@@ -42,6 +44,8 @@ class _StreamHomePageState extends State<StreamHomePage> {
 
   int lastNumber = 0;
   late NumberStream numberStream;
+  late StreamTransformer<int, int> transformer;
+
 
   void changeColor() async {
     // await for (var eventColor in colorStream.getColorStream()) {
@@ -54,8 +58,19 @@ class _StreamHomePageState extends State<StreamHomePage> {
 
   @override
   void initState() {
+    transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value*10);
+      },
+      handleError: (error, stackTrace, sink) {
+        sink.add(-1);
+      },
+      handleDone: (sink) => sink.close(),
+    );
+
+
     numberStream = NumberStream();
-    numberStream.stream.listen((eventNumber) {
+    numberStream.stream.transform(transformer).listen((eventNumber) {
       setState(() {
         lastNumber = eventNumber;
       });
