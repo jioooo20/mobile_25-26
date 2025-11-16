@@ -154,7 +154,7 @@
 
 ## Praktikum 3 W12 Soal 8
 
-![GIF]('/img/soal7.gif')
+![GIF]('/img/soal8.gif')
 
 - Jelaskan maksud kode langkah 1 sampai 3 tersebut!
 
@@ -208,3 +208,89 @@
 
   **Kesimpulan:**
   StreamTransformer berfungsi sebagai **middleware** atau **filter** yang berada di antara Stream producer dan consumer. Dalam kasus ini, transformer mengalikan setiap angka dengan 10 dan mengubah error menjadi nilai -1, sehingga listener selalu menerima data yang sudah dimodifikasi.
+
+
+
+## Praktikum 4 W12 Soal 9
+
+![GIF]('/img/soal9.gif')
+
+![GIF]('/img/soal9img.png')
+
+- Jelaskan maksud kode langkah 2, 6, dan 8 tersebut!
+
+  **Jawaban:**
+
+  **Langkah 2 - Modifikasi `initState()` untuk menggunakan `StreamSubscription`:**
+  ```dart
+  void initState() {
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream;
+    subscription = stream.listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    });
+    subscription.onError((error){
+      setState(() {
+        lastNumber = -1;
+      });
+    });
+    subscription.onDone(() {
+      print("OnDone was called");
+    });
+    super.initState();
+  }
+  ```
+  
+  Method `initState()` dimodifikasi untuk menggunakan **StreamSubscription** yang memberikan kontrol lebih detail terhadap Stream listener:
+  
+  - `numberStreamController = numberStream.controller` menyimpan reference ke StreamController untuk akses langsung
+  - `Stream stream = numberStreamController.stream` mendapatkan Stream dari controller
+  - `subscription = stream.listen()` membuat subscription dan menyimpannya di variabel `subscription` (tipe `StreamSubscription`)
+  - `subscription.onError()` mendaftarkan error handler yang akan dipanggil saat ada error, mengubah `lastNumber` menjadi -1
+  - `subscription.onDone()` mendaftarkan callback yang dipanggil ketika Stream selesai/ditutup, mencetak pesan "OnDone was called"
+  
+  **Keuntungan menggunakan StreamSubscription:**
+  - Dapat di-cancel secara eksplisit dengan `subscription.cancel()`
+  - Dapat di-pause dan resume dengan `subscription.pause()` dan `subscription.resume()`
+  - Memberikan kontrol lifecycle yang lebih baik terhadap listener
+
+  **Langkah 6 - Method `stopStream()` untuk membatalkan subscription:**
+  ```dart
+  subscription.cancel();
+  ```
+  
+  Method ini membatalkan subscription ke Stream dengan memanggil `subscription.cancel()`:
+  - Menghentikan listener dari menerima event lebih lanjut dari Stream
+  - Membebaskan resource yang digunakan oleh subscription
+  - Setelah di-cancel, subscription tidak dapat digunakan lagi dan harus dibuat subscription baru jika ingin listen lagi
+  - Ini adalah **best practice** untuk mencegah memory leak, terutama saat widget di-dispose
+
+  **Langkah 8 - Modifikasi `addRandomNumber()` dengan validasi stream:**
+  ```dart
+  void addRandomNumber() {
+    Random random = Random();
+    int randomNumber = random.nextInt(10);
+    if (!numberStreamController.isClosed) {
+      numberStream.addNumberToSink(randomNumber);
+    }else{
+      setState(() {
+        lastNumber = -1;
+      });
+    }
+  }
+  ```
+  
+  Method ini ditambahkan validasi untuk mengecek status StreamController:
+  - `!numberStreamController.isClosed` mengecek apakah StreamController masih terbuka (belum di-close)
+  - **Jika masih terbuka**: mengirim angka random ke Stream seperti biasa
+  - **Jika sudah tertutup**: mengubah `lastNumber` menjadi -1 sebagai indikator bahwa Stream sudah tidak aktif
+  - Validasi ini mencegah error yang terjadi jika mencoba mengirim data ke Stream yang sudah di-close
+
+  **Kesimpulan:**
+  Ketiga langkah ini mendemonstrasikan **lifecycle management** dari Stream dan Subscription:
+  1. **Langkah 2**: Setup subscription dengan handler lengkap (onData, onError, onDone)
+  2. **Langkah 6**: Membersihkan resource dengan cancel subscription
+  3. **Langkah 8**: Validasi state Stream sebelum mengirim data untuk menghindari error

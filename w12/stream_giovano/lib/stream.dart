@@ -23,20 +23,20 @@ class ColorStream {
 }
 
 class NumberStream {
-  final StreamController<int> _controller = StreamController<int>();
+  final StreamController<int> controller = StreamController<int>();
 
-  Stream<int> get stream => _controller.stream;
+  Stream<int> get stream => controller.stream;
 
   void addNumberToSink(int number) {
-    _controller.sink.add(number);
+    controller.sink.add(number);
   }
 
   close(){
-    _controller.close();
+    controller.close();
   }
 
   addError(){
-    _controller.sink.addError("error");
+    controller.sink.addError("error");
   }
 
 }
