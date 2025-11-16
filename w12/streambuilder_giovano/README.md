@@ -1,4 +1,4 @@
-## Praktikum 5 W12 Soal 12
+## Praktikum 6 W12 Soal 12
 
 ![GIF]('/img/soal12.gif')
 
