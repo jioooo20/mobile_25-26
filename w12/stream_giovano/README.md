@@ -294,3 +294,115 @@
   1. **Langkah 2**: Setup subscription dengan handler lengkap (onData, onError, onDone)
   2. **Langkah 6**: Membersihkan resource dengan cancel subscription
   3. **Langkah 8**: Validasi state Stream sebelum mengirim data untuk menghindari error
+
+  
+## Praktikum 5 W12 Soal 10
+- Jelaskan mengapa error bisa terjadi
+
+  **Jawaban:**
+
+  Error **"Bad state: Stream has already been listened to"** terjadi karena kode ini:
+
+  ```dart
+  void initState() {
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream;
+    subscription = stream.listen((event) {
+      setState(() {
+        values += '$event - ';
+      });
+    });
+    subscription2 = stream.listen((event) {  // ❌ ERROR DI SINI
+      setState(() {
+        values += '$event - ';
+      });
+    });
+    super.initState();
+  }
+  ```
+
+  **Penyebab Error:**
+
+  Secara default, `StreamController` membuat **single-subscription stream**, yang artinya:
+  - Stream hanya bisa di-listen oleh **SATU listener** saja
+  - Ketika `subscription = stream.listen()` dipanggil pertama kali, Stream sudah "diklaim" oleh listener pertama
+  - Saat mencoba memanggil `subscription2 = stream.listen()` yang kedua kalinya, Stream menolak karena sudah memiliki listener
+  - Ini adalah mekanisme proteksi untuk mencegah data broadcast yang tidak diinginkan
+
+  **Solusi:**
+
+  Ada dua cara untuk mengatasi error ini:
+
+  **1. Menggunakan Broadcast Stream:**
+  ```dart
+  final controller = StreamController<int>.broadcast();
+  ```
+  Broadcast stream memungkinkan **multiple listeners** mendengarkan Stream yang sama secara bersamaan.
+
+  **2. Menggunakan Single Listener saja:**
+  Hapus salah satu subscription dan hanya gunakan satu listener:
+  ```dart
+  subscription = stream.listen((event) {
+    setState(() {
+      values += '$event - ';
+    });
+  });
+  // Hapus subscription2
+  ```
+
+  **Analogi:**
+  Bayangkan Stream seperti telepon:
+  - **Single-subscription stream** = telepon biasa, hanya 1 orang yang bisa menerima panggilan
+  - **Broadcast stream** = conference call, banyak orang bisa mendengar sekaligus
+
+
+  
+## Praktikum 5 W12 Soal 11
+
+![GIF]('/img/soal11.gif')
+
+- Jelaskan mengapa hal itu bisa terjadi ?
+
+  **Jawaban:**
+
+  Dari screenshot terlihat bahwa setiap angka muncul **dua kali** (contoh: "5 - 5 -", "3 - 3 -"). Hal ini terjadi karena ada **dua subscription** yang mendengarkan Stream yang sama:
+
+  ```dart
+  void initState() {
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream.asBroadcastStream();
+    
+    subscription = stream.listen((event) {
+      setState(() {
+        values += '$event - ';  // Listener pertama menambahkan angka
+      });
+    });
+    
+    subscription2 = stream.listen((event) {
+      setState(() {
+        values += '$event - ';  // Listener kedua menambahkan angka yang sama
+      });
+    });
+    super.initState();
+  }
+  ```
+
+  **Penjelasan Alur:**
+
+  1. **Broadcast Stream dibuat** dengan `.asBroadcastStream()` yang memungkinkan multiple listeners
+  2. **subscription** (listener pertama) di-setup untuk mendengarkan Stream
+  3. **subscription2** (listener kedua) juga di-setup untuk mendengarkan Stream yang sama
+  4. Ketika tombol "Add Random Number" ditekan, angka dikirim ke Stream
+  5. **Kedua listener menerima event yang sama secara bersamaan**
+  6. Masing-masing listener menjalankan `setState()` dan menambahkan `'$event - '` ke variabel `values`
+  7. **Hasilnya**: setiap angka muncul dua kali di UI
+
+  **Contoh Flow:**
+  - User tekan tombol → angka 5 dikirim ke Stream
+  - subscription (listener 1) menerima 5 → `values += '5 - '` → values = "5 - "
+  - subscription2 (listener 2) menerima 5 → `values += '5 - '` → values = "5 - 5 - "
+
+  **Kesimpulan:**
+  Setiap angka muncul dua kali karena ada dua listener yang sama-sama mendengarkan dan merespons event yang sama dari Broadcast Stream. Jika ingin angka hanya muncul satu kali, hapus salah satu subscription (subscription atau subscription2).
