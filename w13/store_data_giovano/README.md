@@ -1,16 +1,11 @@
-# store_data_giovano
+# Laporan Praktikum PEMROGRAMAN MOBILE
 
-A new Flutter project.
+| Nama      | NIM      | Kelas      | Mata Kuliah | Semester |
+|-----------|----------|------------|-------------|----------|
+| Giovano Alkandri | 2341720096| TI-3H| PEMROGRAMAN MOBILE    | 5        |
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Praktikum 1 W12 Soal 2
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+![IMAGE](/w13/store_data_giovano/img/soal2.png)
+  
