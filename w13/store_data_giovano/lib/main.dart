@@ -2,6 +2,7 @@ import 'dart:convert';
 import './model/pizza.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,19 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Pizza> myPizzas = [];
 
   int appCounter = 0;
+
+  String documentsPath = '';
+  String tempPath = '';
+
+  Future getPaths() async {
+    final docDit = await getApplicationDocumentsDirectory();
+    final tempDir = await getTemporaryDirectory();
+
+    setState(() {
+      documentsPath = docDit.path;
+      tempPath = tempDir.path;
+    });
+  }
 
   Future readAndWritePreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -82,7 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    readAndWritePreference();
+    getPaths();
+    // readAndWritePreference();
     // readJsonFile().then((value) {
     //   setState(() {
     //     myPizzas = value;
@@ -98,20 +113,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
         title: Text('Flutter JSON Demo giovano'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('You have opened the app $appCounter times'),
-            ElevatedButton(
-              onPressed: () {
-                deletePreference();
-              },
-              child: Text('Reset counter'),
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text('documentsPath: $documentsPath'),
+          Text('tempPath: $tempPath'),
+        ],
       ),
+      // body: Center(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: [
+      //       Text('You have opened the app $appCounter times'),
+      //       ElevatedButton(
+      //         onPressed: () {
+      //           deletePreference();
+      //         },
+      //         child: Text('Reset counter'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       // body: ListView.builder(
       //   itemCount: myPizzas.length,
       //   itemBuilder: (context, index) => ListTile(
