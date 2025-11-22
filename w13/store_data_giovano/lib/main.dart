@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late File myFile;
   String fileText = '';
+
+  final pwdController = TextEditingController();
+  String myPass = '';
+  final storage = const FlutterSecureStorage();
+  final myKey = 'myPass';
+
+  Future writeToSecureStorage() async {
+    await storage.write(key: myKey, value: pwdController.text);
+  }
+
+  Future readFromSecureStorage() async {
+    String secret = await storage.read(key: myKey) ?? '';
+    return secret;
+  }
 
   Future<bool> writeFile() async {
     try {
@@ -144,10 +159,24 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('documentsPath: $documentsPath'),
-          Text('tempPath: $tempPath'),
-          ElevatedButton(onPressed: () => readFile(), child: Text('Read File')),
-          Text(fileText),
+          TextField(controller: pwdController),
+          ElevatedButton(
+            onPressed: () {
+              writeToSecureStorage();
+            },
+            child: Text('Save value'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              readFromSecureStorage().then((value) {
+                setState(() {
+                  myPass = value;
+                });
+              });
+            },
+            child: Text('Read value'),
+          ),
+          Text(myPass),
         ],
       ),
       // body: Center(

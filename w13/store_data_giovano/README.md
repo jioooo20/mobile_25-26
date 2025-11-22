@@ -106,3 +106,8 @@
   - Penggunaan `path_provider` package untuk mendapatkan direktori storage
   - Perbedaan antara documents directory (untuk data permanen) dan temp directory (untuk data sementara)
   - Implementasi read/write file di Flutter menggunakan persistent storage
+
+  
+## Praktikum 7 W13 Soal 9
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+![IMAGE](/w13/store_data_giovano/img/soal9.mp4)
