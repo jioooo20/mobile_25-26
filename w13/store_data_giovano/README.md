@@ -58,3 +58,7 @@
 
   Dengan pendekatan ini, aplikasi lebih **safe** (aman dari crash dan error) dan **maintainable** (mudah dipelihara dan dimodifikasi).
   
+
+## Praktikum 4 W13 Soal 6
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+![IMAGE](/w13/store_data_giovano/img/soal6.gif)
