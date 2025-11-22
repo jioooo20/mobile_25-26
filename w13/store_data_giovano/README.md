@@ -66,3 +66,43 @@
 ## Praktikum 5 W13 Soal 7
 - Masukkan hasil capture layar ke laporan praktikum Anda.
 ![IMAGE](/w13/store_data_giovano/img/soal7.png)
+
+## Praktikum 6 W13 Soal 8
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+![IMAGE](/w13/store_data_giovano/img/soal8.mp4)
+
+- Jelaskan maksud kode pada langkah 3 dan 7 !
+
+  **Penjelasan Kode Langkah 3 dan 7:**
+
+  **Langkah 3 - Method `writeFile()`:**
+  ```dart
+  Future<bool> writeFile() async {
+    try {
+      await myFile.writeAsString('Margherita, Capricciosa, Napoli');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  ```
+  
+  Method ini berfungsi untuk menulis data ke file di storage device:
+  - **`Future<bool>`**: Mengembalikan nilai boolean secara asynchronous untuk mengindikasikan apakah penulisan berhasil atau tidak
+  - **`async/await`**: Menggunakan asynchronous programming karena operasi file I/O membutuhkan waktu
+  - **`myFile.writeAsString()`**: Menulis string 'Margherita, Capricciosa, Napoli' ke dalam file
+  - **`try-catch`**: Error handling untuk menangani kemungkinan error (misalnya: permission denied, storage full)
+  - **Return value**: `true` jika berhasil, `false` jika terjadi error
+  
+  **Langkah 7 - Menampilkan Path dan Data:**
+  
+  Pada langkah 7, ditambahkan UI untuk menampilkan:
+  1. **documentsPath**: Path direktori dokumen aplikasi (`/data/user/0/com.example.store_data_giovano/app_flutter`)
+  2. **tempPath**: Path direktori temporary/cache (`/data/user/0/com.example.store_data_giovano/cache`)
+  3. **Button "Read File"**: Tombol untuk membaca data dari file yang telah ditulis
+  4. **Data yang dibaca**: Menampilkan isi file (dalam screenshot terlihat "2341720096 giovaon")
+  
+  Kode ini mendemonstrasikan:
+  - Penggunaan `path_provider` package untuk mendapatkan direktori storage
+  - Perbedaan antara documents directory (untuk data permanen) dan temp directory (untuk data sementara)
+  - Implementasi read/write file di Flutter menggunakan persistent storage
