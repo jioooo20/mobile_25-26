@@ -69,7 +69,7 @@
 
 ## Praktikum 6 W13 Soal 8
 - Masukkan hasil capture layar ke laporan praktikum Anda.
-![IMAGE](/w13/store_data_giovano/img/soal8.mp4)
+![IMAGE](/w13/store_data_giovano/img/soal8.gif)
 
 - Jelaskan maksud kode pada langkah 3 dan 7 !
 
@@ -110,4 +110,4 @@
   
 ## Praktikum 7 W13 Soal 9
 - Masukkan hasil capture layar ke laporan praktikum Anda.
-![IMAGE](/w13/store_data_giovano/img/soal9.mp4)
+![IMAGE](/w13/store_data_giovano/img/soal9.gif)
