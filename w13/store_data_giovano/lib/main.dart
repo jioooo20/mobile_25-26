@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:store_data_giovano/httphelper.dart';
-
 import './model/pizza.dart';
+import './model/pizza_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
@@ -181,6 +181,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PizzaDetailScreen()),
           );
         },
       ),
