@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:store_data_giovano/httphelper.dart';
+
 import './model/pizza.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late File myFile;
   String fileText = '';
+
+  Future<List<Pizza>> callPizzas() async {
+    HttpHelper helper = HttpHelper();
+    List<Pizza> pizzas = await helper.getPizzaList();
+    return pizzas;
+  }
 
   final pwdController = TextEditingController();
   String myPass = '';
@@ -151,56 +159,85 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text('Flutter JSON Demo giovano'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          TextField(controller: pwdController),
-          ElevatedButton(
-            onPressed: () {
-              writeToSecureStorage();
+      appBar: AppBar(title: const Text('JSON GEOOOOOOO')),
+      body: FutureBuilder(
+        future: callPizzas(),
+        builder: (BuildContext context, AsyncSnapshot<List<Pizza>> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          }
+          if (!snapshot.hasData) {
+            return const CircularProgressIndicator();
+          }
+          return ListView.builder(
+            itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
+            itemBuilder: (BuildContext context, int position) {
+              return ListTile(
+                title: Text(snapshot.data![position].pizzaName),
+                subtitle: Text(
+                  snapshot.data![position].description +
+                      ' - € ' +
+                      snapshot.data![position].price.toString(),
+                ),
+              );
             },
-            child: Text('Save value'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              readFromSecureStorage().then((value) {
-                setState(() {
-                  myPass = value;
-                });
-              });
-            },
-            child: Text('Read value'),
-          ),
-          Text(myPass),
-        ],
+          );
+        },
       ),
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //     children: [
-      //       Text('You have opened the app $appCounter times'),
-      //       ElevatedButton(
-      //         onPressed: () {
-      //           deletePreference();
-      //         },
-      //         child: Text('Reset counter'),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      // body: ListView.builder(
-      //   itemCount: myPizzas.length,
-      //   itemBuilder: (context, index) => ListTile(
-      //     title: Text(myPizzas[index].pizzaName),
-      //     subtitle: Text(myPizzas[index].description + ''
-      //         ' - \$${myPizzas[index].price.toStringAsFixed(2)}'),
-      //   ),
-      // ),
     );
   }
+
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+  //       title: Text('Flutter JSON Demo giovano'),
+  //     ),
+  //     body: Column(
+  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //       children: [
+  //         TextField(controller: pwdController),
+  //         ElevatedButton(
+  //           onPressed: () {
+  //             writeToSecureStorage();
+  //           },
+  //           child: Text('Save value'),
+  //         ),
+  //         ElevatedButton(
+  //           onPressed: () {
+  //             readFromSecureStorage().then((value) {
+  //               setState(() {
+  //                 myPass = value;
+  //               });
+  //             });
+  //           },
+  //           child: Text('Read value'),
+  //         ),
+  //         Text(myPass),
+  //       ],
+  //     ),
+  //     // body: Center(
+  //     //   child: Column(
+  //     //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     //     children: [
+  //     //       Text('You have opened the app $appCounter times'),
+  //     //       ElevatedButton(
+  //     //         onPressed: () {
+  //     //           deletePreference();
+  //     //         },
+  //     //         child: Text('Reset counter'),
+  //     //       ),
+  //     //     ],
+  //     //   ),
+  //     // ),
+  //     // body: ListView.builder(
+  //     //   itemCount: myPizzas.length,
+  //     //   itemBuilder: (context, index) => ListTile(
+  //     //     title: Text(myPizzas[index].pizzaName),
+  //     //     subtitle: Text(myPizzas[index].description + ''
+  //     //         ' - \$${myPizzas[index].price.toStringAsFixed(2)}'),
+  //     //   ),
+  //     // ),
+  //   );
+  // }
 }

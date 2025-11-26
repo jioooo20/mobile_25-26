@@ -111,3 +111,7 @@
 ## Praktikum 7 W13 Soal 9
 - Masukkan hasil capture layar ke laporan praktikum Anda.
 ![IMAGE](/w13/store_data_giovano/img/soal9.gif)
+  
+## Praktikum 1 W14 Soal 1
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+![IMAGE](/w13/store_data_giovano/img/w14soal1.png)

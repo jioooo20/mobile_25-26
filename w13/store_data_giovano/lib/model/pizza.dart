@@ -12,10 +12,10 @@ class Pizza {
   final String imageUrl;
   
   Pizza.fromJson(Map<String, dynamic> json)
-    : id = int.tryParse(json[keyId]) ?? 0,
+    : id = json[keyId] is int ? json[keyId] : (int.tryParse(json[keyId].toString()) ?? 0),
       pizzaName = json[keyName] != '' ? json[keyName].toString() : 'No Name',
       description = json[keydescription] != null ? json[keydescription].toString() : '',
-      price = double.tryParse(json[keyprice].toString()) ?? 0,
+      price = json[keyprice] is double ? json[keyprice] : (double.tryParse(json[keyprice].toString()) ?? 0),
       imageUrl = json[keyimageUrl] ?? '';
   Map<String, dynamic> toJson() => {
     keyId: id,
