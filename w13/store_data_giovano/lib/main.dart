@@ -40,6 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int appCounter = 0;
 
+  late Future<List<Pizza>> _pizzasFuture;
+
   String documentsPath = '';
   String tempPath = '';
 
@@ -144,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    _pizzasFuture = callPizzas();
     getPaths().then((_) {
       myFile = File('$documentsPath/myfile.txt');
       writeFile();
@@ -161,35 +164,50 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('JSON GEOOOOOOO')),
       body: FutureBuilder(
-        future: callPizzas(),
+        future: _pizzasFuture,
         builder: (BuildContext context, AsyncSnapshot<List<Pizza>> snapshot) {
-          if (snapshot.hasError) {
-            return const Text('Something went wrong');
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
           }
-          if (!snapshot.hasData) {
-            return const CircularProgressIndicator();
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No pizzas found. Check API connection.'));
           }
           return ListView.builder(
             itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
             itemBuilder: (BuildContext context, int position) {
               return ListTile(
-                title: Text(snapshot.data![position].pizzaName),
+                title: Text(snapshot.data![position].pizzaName ?? ''),
                 subtitle: Text(
-                  snapshot.data![position].description +
-                      ' - € ' +
-                      snapshot.data![position].price.toString(),
+                  '${snapshot.data![position].description} - € ${snapshot.data![position].price}',
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PizzaDetailScreen(
+                        pizza: snapshot.data![position],
+                        isNew: false,
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PizzaDetailScreen()),
+            MaterialPageRoute(
+              builder: (context) =>
+                  PizzaDetailScreen(pizza: Pizza(), isNew: true),
+            ),
           );
         },
       ),

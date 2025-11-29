@@ -6,20 +6,20 @@ class Pizza {
   static const keyimageUrl = 'imageUrl';
   static const keyrating = 'rating';
   
-  final int id;
-  final String pizzaName;
-  final String description;
-  final double price;
-  final String imageUrl;
-  final double rating;
+  final int? id;
+  final String? pizzaName;
+  final String? description;
+  final double? price;
+  final String? imageUrl;
+  final double? rating;
   
   Pizza({
-    required this.id,
-    required this.pizzaName,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
-    required this.rating,
+     this.id,
+     this.pizzaName,
+     this.description,
+     this.price,
+     this.imageUrl,
+     this.rating,
   });
   
   Pizza.fromJson(Map<String, dynamic> json)
