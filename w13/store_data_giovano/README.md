@@ -120,6 +120,8 @@
 - Masukkan hasil capture layar ke laporan praktikum Anda.
 ![IMAGE](/w13/store_data_giovano/img/w14soa2_1.png)
 
+![IMAGE](/w13/store_data_giovano/img/w14soa2_2.png)
+
 ## Praktikum 3 W14 Soal 3
 - Masukkan hasil capture layar ke laporan praktikum Anda.
 ![IMAGE](/w13/store_data_giovano/img/w14soal3.png)
