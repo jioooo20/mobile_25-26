@@ -123,3 +123,7 @@
 ## Praktikum 3 W14 Soal 3
 - Masukkan hasil capture layar ke laporan praktikum Anda.
 ![IMAGE](/w13/store_data_giovano/img/w14soal3.png)
+
+## Praktikum 4 W14 Soal 4
+- Masukkan hasil capture layar ke laporan praktikum Anda.
+![IMAGE](/w13/store_data_giovano/img/w14soal4.gif)
